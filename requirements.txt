@@ -1,0 +1,6 @@
+streamlit
+assemblyai
+groq
+requests
+python-dotenv
+nltk
