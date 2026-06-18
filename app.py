@@ -15,7 +15,7 @@ stemmer = PorterStemmer()
 
 load_dotenv()
 
-st.set_page_config(page_title="meetask", page_icon=None, layout="centered")
+st.set_page_config(page_title="meet2task", page_icon=None, layout="wide")
 
 def clean_env_val(key):
     val = os.getenv(key, "")
@@ -43,7 +43,14 @@ html, body, [data-testid="stAppViewContainer"] p, div, h1, h2, h3, h4, span, lab
     font-family: 'Space Grotesk', sans-serif !important
 }
 footer,#MainMenu,.stDeployButton{visibility:hidden!important}
-[data-testid="stMain"]>div{padding:1.5rem 2rem 5rem}
+[data-testid="stMain"]>div{padding:1.5rem 3rem 5rem}
+[data-testid="stMainBlockContainer"] {
+    max-width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
 html{scroll-behavior:smooth}
 
 [data-testid="stAppViewContainer"]{background:linear-gradient(-45deg,#07010f,#0a0e1a,#020b14,#0d0320,#040d1a);background-size:400% 400%;animation:aurora 18s ease infinite}
@@ -58,7 +65,7 @@ html{scroll-behavior:smooth}
 .hero p{color:rgba(255,255,255,.38);font-size:.95rem;line-height:1.7;margin:0}
 
 @keyframes spinRing{to{transform:rotate(360deg)}}
-.step-wrap{display:flex;align-items:center;gap:.9rem;margin:2.2rem 0 1rem}
+.step-wrap{display:flex;align-items:center;gap:.9rem;margin:2.5rem 0 1.8rem;padding-left:0.5rem}
 .step-num-wrap{position:relative;width:36px;height:36px;flex-shrink:0}
 .step-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#9333ea,#ec4899,#06b6d4,#9333ea);animation:spinRing 3s linear infinite}
 .step-num-inner{position:absolute;inset:2px;border-radius:50%;background:#0a0114;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff}
@@ -76,7 +83,13 @@ input,[data-testid="stTextInput"] input{background:rgba(255,255,255,.04)!importa
 [data-testid="stSelectbox"]>div>div{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;color:rgba(255,255,255,.85)!important;height:38px!important}
 
 div[data-testid="stCheckbox"] input[type="checkbox"]{accent-color:#9333ea!important;filter:hue-rotate(60deg) saturate(1.5)!important}
-div[data-testid="stCheckbox"]{padding-left:8px!important}
+# div[data-testid="stCheckbox"]{
+#     padding:0!important;
+#     margin:0!important;
+#     display:flex!important;
+#     align-items:center!important;
+#     justify-content:center!important;
+# }
 
 .transcript-box{background:rgba(255,255,255,.02);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:1.5rem 1.75rem;max-height:450px;overflow-y:auto}
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.25rem}
@@ -93,9 +106,9 @@ div[data-testid="stCheckbox"]{padding-left:8px!important}
 div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizontalBlock"]{background:rgba(255,255,255,0.02)!important;border:1px solid rgba(255,255,255,0.05)!important;border-radius:10px!important;padding:0.15rem 0.5rem!important;margin-bottom:3px!important}
 
 .hero-roadmap{display:flex;align-items:center;justify-content:center;gap:0;margin-top:2rem}
-.hstep{display:flex;flex-direction:column;align-items:center;gap:.45rem;padding:.8rem 1.1rem;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(147,51,234,.2);min-width:90px;text-align:center}
-.hstep-n{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff}
-.hstep-t{font-size:.7rem;font-weight:600;color:rgba(255,255,255,.6);line-height:1.35}
+.hstep{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.4rem 1.6rem;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(147,51,234,.2);min-width:120px;text-align:center}
+.hstep-n{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff}
+.hstep-t{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.7);line-height:1.4}
 .hstep-conn{display:flex;align-items:center;padding-bottom:1.5rem}
 .hstep-line{width:28px;height:1.5px;background:linear-gradient(90deg,rgba(147,51,234,.35),rgba(6,182,212,.35))}
 .hstep-tip{width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid rgba(6,182,212,.4)}
@@ -112,6 +125,7 @@ div[data-testid="stHorizontalBlock"]{align-items:center!important}
 
 /* Anchor marker-ի div-ը դարձնում ենք անտեսանելի (height=0) */
 div[data-testid="stMarkdown"]:has(.anchor-section){
+    display:none!important;
     margin:0!important;
     padding:0!important;
     height:0!important;
@@ -121,14 +135,23 @@ div[data-testid="stMarkdown"]:has(.anchor-section){
 }
 
 /* Մարկերից անմիջապես հետո եկող task row-ը կպցնում ենք վերևից */
-div[data-testid="stMarkdown"]:has(.anchor-section) + div[data-testid="stHorizontalBlock"]{
-    margin-top:0!important;
-    margin-bottom:6px!important;
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]{
+    margin-top:-12px!important;
+    margin-bottom:-12px!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
 }
 
 /* Task row-երի ընդհանուր vertical gap-ը կրճատում ենք */
+div[data-testid="stVerticalBlock"]:has(> div > div[data-testid="stMarkdown"] .anchor-section){
+    gap:0!important;
+}
+
 div[data-testid="stVerticalBlock"]:has(> div > div[data-testid="stMarkdown"] .anchor-section) > div{
     gap:0!important;
+    margin:0!important;
+    padding:0!important;
 }
 
 /* === Selected Tasks for Jira Sync — եզրագծված տուփ === */
@@ -167,8 +190,28 @@ div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizont
     border-radius:8px!important;
 }
 
-div[data-testid="stBlock"] button[key^="del_task_"]{height:32px!important;width:32px!important;max-width:32px!important;min-width:32px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;border-radius:8px!important;background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;color:rgba(255,255,255,.6)!important;transition:all 0.2s!important}
-div[data-testid="stBlock"] button[key^="del_task_"]:hover{background:rgba(244,63,94,0.15)!important;border-color:#f43f5e!important;color:#f43f5e!important}
+.del-btn-wrap button {
+    height:36px!important;
+    width:36px!important;
+    min-width:36px!important;
+    max-width:36px!important;
+    padding:0!important;
+    border-radius:10px!important;
+    background:rgba(255,255,255,0.05)!important;
+    border:1px solid rgba(255,255,255,0.12)!important;
+    color:rgba(255,255,255,0.6)!important;
+    font-size:1rem!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    transition:all 0.2s!important;
+    aspect-ratio: 1 / 1 !important;
+}
+.del-btn-wrap button:hover {
+    background:rgba(244,63,94,0.15)!important;
+    border-color:#f43f5e!important;
+    color:#f43f5e!important;
+}
 
 @keyframes softWordFlash{0%{background-color:#9333ea!important;color:#fff!important;box-shadow:0 0 20px #9333ea;border-radius:4px}100%{background-color:#bbf7d0;color:#166534}}
 @keyframes softButtonFlash{0%{background-color:#9333ea!important;border-color:#c084fc!important;box-shadow:0 0 20px #9333ea;transform:scale(1.05)}100%{background-color:rgba(147,51,234,0.15);border-color:rgba(147,51,234,0.35);transform:scale(1)}}
@@ -179,6 +222,77 @@ div[data-testid="stBlock"] button[key^="del_task_"]:hover{background:rgba(244,63
 .sync-result-row{display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:0.55rem 1rem;margin-bottom:0.4rem}
 .sync-key-badge{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10b981!important;font-size:0.78rem;font-weight:700;padding:2px 10px;border-radius:6px;text-decoration:none!important;white-space:nowrap}
 .sync-key-badge:hover{background:rgba(16,185,129,0.3)!important}
+
+div[data-testid="element-container"]{
+    margin-bottom:0!important;
+}
+
+# div[data-testid="stHorizontalBlock"]{
+#     margin:0!important;
+#     padding:0!important;
+#     min-height:auto!important;
+#     align-items:center!important;
+# }
+
+/* միայն task row-երի համար */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]{
+    margin-top:-8px!important;
+    margin-bottom:-8px!important;
+    padding:0!important;
+}
+
+/* task row-ի ներսի column-ները ուղղահայաց կենտրոնացնել */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]
+> div{
+    display:flex!important;
+    align-items:center!important;
+}
+
+/* checkbox-ը միայն task row-երում */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]
+div[data-testid="stCheckbox"]{
+    margin:0!important;
+    padding:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+}
+
+/* delete button-ը միայն task row-երում */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]
+button{
+    height:38px!important;
+    width:38px!important;
+    min-width:38px!important;
+    max-width:38px!important;
+    padding:0!important;
+    border-radius:10px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+}
+
+[data-testid="stTextInput"] {
+    margin-bottom: 0.5rem !important;
+}
+[data-testid="stTextInput"] label {
+    font-size: 0.78rem !important;
+    color: rgba(255,255,255,0.4) !important;
+    margin-bottom: 4px !important;
+    letter-spacing: 0.5px !important;
+}
+
+.step-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(147,51,234,0.5), rgba(6,182,212,0.4), transparent);
+    margin: 7px 0 0 0;
+    box-shadow: 0 0 8px rgba(147,51,234,0.3);
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -297,7 +411,8 @@ st.markdown(f"""
 <div class="hero-blob1"></div><div class="hero-blob2"></div>
 <div class="hero-tag"><div class="hero-dot"></div>AI-Powered · Real-time · Jira-ready</div>
 {_logo_html}
-<p style="color:rgba(255,255,255,.55);font-size:1rem;margin:.5rem 0 .3rem;text-align:center">Turning meeting recordings into structured Jira tasks — automatically.</p>
+<p style="color:rgba(255,255,255,.9);font-size:1.45rem;font-weight:600;margin:.8rem 0 .5rem;text-align:center;line-height:1.5">Turning meeting recordings into structured Jira tasks — automatically.</p>
+<p style="color:rgba(255,255,255,.38);font-size:0.95rem;margin:0 auto .8rem;text-align:center;max-width:520px;line-height:1.7">Upload an audio file, let AI transcribe and identify who said what,<br>review the extracted tasks, then push them to Jira in one click.</p>
 <div class="hero-roadmap">
     <div class="hstep"><div class="hstep-n">1</div><div class="hstep-t">Upload<br>Recording</div></div>
     <div class="hstep-conn"><div class="hstep-line"></div><div class="hstep-tip"></div></div>
@@ -310,7 +425,10 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+
+
 # ─── Step 1 ───────────────────────────────────────────────────────────────────
+st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">1</div></div><p class="step-title">Upload Recording</p></div>', unsafe_allow_html=True)
 uploaded_file = st.file_uploader("Upload audio file", type=["ogg", "mp3", "wav"], label_visibility="collapsed")
 
@@ -319,6 +437,7 @@ if uploaded_file:
     st.markdown(f'<div style="background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.35);border-radius:10px;padding:.6rem 1rem;color:#67e8f9;font-size:.9rem">✓ Ready: <strong>{uploaded_file.name}</strong> ({size_mb:.1f} MB)</div>', unsafe_allow_html=True)
 
 # ─── Step 2 ───────────────────────────────────────────────────────────────────
+st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">2</div></div><p class="step-title">Transcribe &amp; Extract</p></div>', unsafe_allow_html=True)
 
 if st.button("Run AI Processing", type="primary", disabled=not uploaded_file):
@@ -366,9 +485,12 @@ if st.button("Run AI Processing", type="primary", disabled=not uploaded_file):
             ]
         )
 
-        st.session_state.tasks = extract_tasks_with_groq(
-            full_text_formatted
-        )
+        tasks = extract_tasks_with_groq(full_text_formatted)
+
+        for task in tasks:
+            task["id"] = uuid.uuid4().hex
+
+        st.session_state.tasks = tasks
 
         # ── Պահպանում ենք Groq-ի վերադարձրած JSON-ը՝ tasks.json ֆայլում ──
         # (Այս ֆայլը թարմացվում է ամեն մշակումից հետո, որպեսզի տեսանելի
@@ -424,7 +546,7 @@ if st.button("Run AI Processing", type="primary", disabled=not uploaded_file):
             st.session_state[f"task_sel_{i}"] = False
 
         proc_ph.markdown(
-            render_proc_steps(4, done=True),
+            render_proc_steps(3, done=True),
             unsafe_allow_html=True
         )
 
@@ -444,13 +566,13 @@ if "speaker_mapping" not in st.session_state:
 speaker_mapping = st.session_state.speaker_mapping
 
 if unique_speakers:
-    st.markdown('<p style="font-size:0.9rem;color:rgba(255,255,255,0.5);margin-bottom:5px;"> Assign Real Names to Speakers:</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:0.9rem;color:rgba(255,255,255,0.5);margin-top:1.2rem;margin-bottom:0.75rem;"> Assign Real Names to Speakers:</p>', unsafe_allow_html=True)
     n = len(unique_speakers)
     if n == 1:
         col_spk, _ = st.columns([3, 7])
         cols = [col_spk]
     else:
-        cols = st.columns(n)
+        cols = st.columns(n, gap="large")
     for idx, old_name in enumerate(unique_speakers):
         new_name = cols[idx].text_input(f"Name for {old_name}", value=old_name, key=f"spk_name_{idx}")
         speaker_mapping[old_name] = new_name.strip() if new_name.strip() else old_name
@@ -587,8 +709,9 @@ if st.session_state.segments:
         )
     st.markdown('<div class="transcript-box">' + "".join(lines_html) + "</div>", unsafe_allow_html=True)
 
-# ─── Step 3 ───────────────────────────────────────────────────────────────────
+# ─── Step 3 & Step 4 (Review & Sync) ──────────────────────────────────────────
 if st.session_state.tasks:
+    st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
     st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">3</div></div><p class="step-title">Review Tasks</p></div>', unsafe_allow_html=True)
 
     col_m1, col_m2, col_m3 = st.columns([0.45, 0.55, 8.5])
@@ -599,22 +722,25 @@ if st.session_state.tasks:
 
     if master_click != st.session_state.master_select:
         st.session_state.master_select = master_click
-        for i in range(len(st.session_state.tasks)):
-            st.session_state[f"task_sel_{i}"] = master_click
+        for task in st.session_state.tasks:
+            st.session_state[f"task_sel_{task['id']}"] = master_click
         st.rerun()
 
     st.session_state.final_sync_list = []
     to_delete = None
 
     for i, t in enumerate(st.session_state.tasks):
+        task_id = t["id"]
         task_text = t["text"]
+
         for old_spk, new_name in speaker_mapping.items():
             task_text = task_text.replace(old_spk, new_name)
-        if task_text:
-            task_text = task_text.strip().capitalize()
 
         st.markdown(f"<div id='task_anchor_{i}' class='anchor-section'>", unsafe_allow_html=True)
-        col_num, col_check, col_content = st.columns([0.45, 0.55, 8.5])
+        col_num, col_check, col_content = st.columns(
+            [0.45, 0.45, 9.1],
+            vertical_alignment="center"
+        )
 
         with col_num:
             st.markdown(f"<div id='task_btn_{i}' class='task-btn-target'>", unsafe_allow_html=True)
@@ -622,35 +748,46 @@ if st.session_state.tasks:
             st.markdown("</div>", unsafe_allow_html=True)
 
         with col_check:
-            if f"task_sel_{i}" not in st.session_state: 
-                st.session_state[f"task_sel_{i}"] = st.session_state.master_select
-            is_sel = st.checkbox("", value=st.session_state[f"task_sel_{i}"], key=f"task_sel_{i}", label_visibility="collapsed")
+            if f"task_sel_{task_id}" not in st.session_state:
+                st.session_state[f"task_sel_{task_id}"] = st.session_state.master_select
+            is_sel = st.checkbox(
+                "",
+                value=st.session_state[f"task_sel_{task_id}"],
+                key=f"task_sel_{task_id}",
+                label_visibility="collapsed"
+            )
 
         with col_content:
-            sub_c1, sub_c2, sub_c3 = st.columns([7.2, 2.0, 0.8])
+            sub_c1, sub_c2, sub_c3 = st.columns(
+                [7.5, 1.7, 0.6],
+                vertical_alignment="center"
+            )
             with sub_c1:
-                txt = st.text_input("", value=task_text, key=f"txt_{i}", label_visibility="collapsed")
+                txt = st.text_input("", value=task_text, key=f"txt_{task_id}", label_visibility="collapsed")
             with sub_c2:
                 curr_status = t["status"]
                 default_idx = 0 if curr_status == "NEW_TASK" else 1 if curr_status == "IN_PROGRESS" else 2
-                stat = st.selectbox("", ["To Do", "In Progress", "Done"], index=default_idx, key=f"st_{i}", label_visibility="collapsed")
+                stat = st.selectbox("", ["To Do", "In Progress", "Done"], index=default_idx, key=f"st_{task_id}", label_visibility="collapsed")
             with sub_c3:
-                if st.button("✕", key=f"del_task_{i}"): 
-                    to_delete = i
+                st.markdown('<div class="del-btn-wrap">', unsafe_allow_html=True)
+                if st.button("✕", key=f"del_task_{task_id}"):
+                    to_delete = task_id
+                st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown("</div>", unsafe_allow_html=True)
 
         if is_sel:
             st.session_state.final_sync_list.append({
-                "id": i+1, "text": txt, "status": stat,
+                "task_id": task_id, "display_id": i + 1, "text": txt, "status": stat,
                 "source": t.get("source_sentence", "")
             })
 
     if to_delete is not None:
-        st.session_state.tasks.pop(to_delete)
-        for key in list(st.session_state.keys()):
-            if key.startswith(("task_sel_", "txt_", "st_")):
-                del st.session_state[key]
+        st.session_state.tasks = [
+            task
+            for task in st.session_state.tasks
+            if task["id"] != to_delete
+        ]
         st.rerun()
 
     done_c = sum(1 for t in st.session_state.tasks if t['status'] == 'DONE')
@@ -668,6 +805,7 @@ if st.session_state.tasks:
         "In Progress": ("rgba(96,165,250,0.15)", "#60a5fa"),
         "Done": ("rgba(16,185,129,0.15)", "#10b981")
     }
+    st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 
     with st.container():
         st.markdown('<div class="sel-panel-marker"></div>', unsafe_allow_html=True)
@@ -691,13 +829,13 @@ if st.session_state.tasks:
 
             for item in st.session_state.final_sync_list:
                 bg, fg = status_colors.get(item["status"], ("rgba(255,255,255,0.1)", "#fff"))
-                desc_key = f"desc_toggle_{item['id']}"
+                desc_key = f"desc_toggle_{item['task_id']}"
                 if desc_key not in st.session_state:
                     st.session_state[desc_key] = True
 
                 st.markdown('<div class="sel-row-marker"></div>', unsafe_allow_html=True)
                 c1, c2, c3, c4 = st.columns([0.6, 4.8, 1.9, 1.7])
-                c1.markdown(f'<p style="color:#c084fc;font-weight:bold;text-align:center;margin:0;padding-top:7px;font-size:0.9rem;">#{item["id"]}</p>', unsafe_allow_html=True)
+                c1.markdown(f'<p style="color:#c084fc;font-weight:bold;text-align:center;margin:0;padding-top:7px;font-size:0.9rem;">#{item["display_id"]}</p>', unsafe_allow_html=True)
                 c2.markdown(f'<p style="color:rgba(255,255,255,0.85);font-size:0.92rem;margin:0;padding-top:7px;">{item["text"]}</p>', unsafe_allow_html=True)
                 c3.markdown(f'<div style="padding-top:5px;"><span class="badge-status" style="background:{bg};color:{fg};">{item["status"]}</span></div>', unsafe_allow_html=True)
                 c4.toggle(
@@ -707,14 +845,14 @@ if st.session_state.tasks:
                     label_visibility="collapsed"
                 )
 
-if st.session_state.tasks:
+    # ─── Step 4 ───────────────────────────────────────────────────────────────────
     st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">4</div></div><p class="step-title">Send to Jira</p></div>', unsafe_allow_html=True)
-
+    
     if st.button("Sync Selected Tasks to Jira", type="primary", disabled=not st.session_state.final_sync_list):
         synced = []
         with st.spinner("Pushing to Jira..."):
             for item in st.session_state.final_sync_list:
-                desc_key = f"desc_toggle_{item['id']}"
+                desc_key = f"desc_toggle_{item['task_id']}"
                 use_desc = st.session_state.get(desc_key, True)
                 desc = (item.get("source") or item["text"]) if use_desc else ""
                 key = create_jira_issue(item["text"], desc)
@@ -727,11 +865,6 @@ if st.session_state.tasks:
 
     if st.session_state.synced_results:
         rows_html = ""
-        status_colors = {
-            "To Do": ("rgba(156,163,175,0.15)", "#9ca3af"),
-            "In Progress": ("rgba(96,165,250,0.15)", "#60a5fa"),
-            "Done": ("rgba(16,185,129,0.15)", "#10b981")
-        }
         for r in st.session_state.synced_results:
             jira_url = f"https://{JIRA_DOMAIN}/browse/{r['key']}" if JIRA_DOMAIN else "#"
             s_bg, s_fg = status_colors.get(r.get("status", "To Do"), ("rgba(255,255,255,0.1)", "#fff"))

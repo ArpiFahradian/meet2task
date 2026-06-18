@@ -1,5 +1,0 @@
-[1.53s] Hey, how are you doing?
-[2.82s] I've been working on the responsive navigation menu and that's all finished now.
-[7.30s] I'm currently diving into the API integration for the user dashboard to get the data flowing.
-[12.51s] Once that's wrapped up, I'll be moving on to optimizing the image assets for better load times.
-[17.83s] How's everything on your end?
