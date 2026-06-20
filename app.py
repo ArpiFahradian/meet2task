@@ -619,7 +619,7 @@ st.markdown(f"""
 st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">1</div></div><p class="step-title">Upload Recording</p></div>', unsafe_allow_html=True)
 
-uploaded_file = st.file_uploader("Upload audio file", type=["ogg", "mp3", "wav"], label_visibility="collapsed")
+uploaded_file = st.file_uploader("", type=["ogg", "mp3", "wav"], label_visibility="collapsed")
 
 if "demo_audio_bytes" in st.session_state and not uploaded_file:
     import io
