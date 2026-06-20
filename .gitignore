@@ -3,3 +3,4 @@ tasks.json
 transcript.json
 __pycache__/
 *.pyc
+mock_data.py

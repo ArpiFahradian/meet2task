@@ -11,6 +11,7 @@ from groq import Groq
 from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
 from nltk.stem import PorterStemmer
+from mock_data import get_mock_demo_data
 stemmer = PorterStemmer()
 
 load_dotenv()
@@ -37,7 +38,7 @@ base_url = f"https://{JIRA_DOMAIN}" if JIRA_DOMAIN else ""
 # ──── CSS ──────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap');
 
 html, body, [data-testid="stAppViewContainer"] p, div, h1, h2, h3, h4, span, label {
     font-family: 'Space Grotesk', sans-serif !important
@@ -77,8 +78,21 @@ html{scroll-behavior:smooth}
     background: rgba(147,51,234,0.04) !important;
     padding: 20px !important;
 }
-.stButton>button[kind="primary"]{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;border:none!important;color:#fff!important;font-weight:700!important;font-size:.9rem!important;border-radius:12px!important;padding:.7rem 2rem!important}
 
+.stButton>button[kind="primary"]{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;border:none!important;color:#fff!important;font-weight:700!important;font-size:.9rem!important;border-radius:12px!important;padding:.7rem 2rem!important;outline:none!important;box-shadow:none!important}
+.stButton>button[kind="primary"]:hover{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;color:#fff!important;box-shadow:0 0 20px rgba(147,51,234,.5)!important;outline:none!important}
+.stButton>button[kind="primary"]:focus,
+.stButton>button[kind="primary"]:focus-visible,
+.stButton>button[kind="primary"]:active{
+    outline:none!important;
+    box-shadow:0 0 0 2px rgba(147,51,234,.5)!important;
+    color:#fff!important;
+}
+.stButton>button[kind="primary"]:disabled{
+    background:rgba(147,51,234,.2)!important;
+    color:rgba(255,255,255,.3)!important;
+    box-shadow:none!important;
+}
 input,[data-testid="stTextInput"] input{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;color:rgba(255,255,255,.85)!important;height:38px!important}
 [data-testid="stSelectbox"]>div>div{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;color:rgba(255,255,255,.85)!important;height:38px!important}
 
@@ -293,6 +307,149 @@ button{
     margin: 7px 0 0 0;
     box-shadow: 0 0 8px rgba(147,51,234,0.3);
 }
+
+.hero-welcome{
+    display:block !important;
+
+    width:100% !important;
+    max-width:900px !important;
+
+    margin-left:auto !important;
+    margin-right:auto !important;
+
+    text-align:center !important;
+
+    font-size:1.55rem !important;
+    font-weight:700 !important;
+
+    color:rgba(240, 240, 240, 0.6) !important;
+
+    line-height:1.55 !important;
+    padding:10px 0
+}
+
+.demo-section {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    # background: rgba(255,255,255,.02);
+    # border: 1px dashed rgba(147,51,234,.25);
+    border-radius: 16px;
+}
+
+.ready-badge-full {
+    width: 100%;
+    height: 44px;
+    background: rgba(6,182,212,.12);
+    border: 1px solid rgba(6,182,212,.35);
+    border-radius: 10px;
+    padding: 0 1rem;
+    color: #67e8f9;
+    font-size: .9rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) {
+    align-items: stretch !important;
+}
+div[data-testid="stButton"]:has(button[key="clear_demo"]) {
+    height: 100%;
+    display: flex;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) {
+    align-items: stretch !important;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) > div[data-testid="column"] {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) div[data-testid="stButton"] {
+    height: 44px !important;
+}
+button[key="clear_demo"] {
+    height: 100% !important;
+    min-height: 44px !important;
+    border-radius: 10px !important;
+    background: rgba(255,255,255,.05) !important;
+    border: 1px solid rgba(255,255,255,.15) !important;
+    color: rgba(255,255,255,.7) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+button[key="clear_demo"]:hover {
+    background: rgba(244,63,94,.15) !important;
+    border-color: #f43f5e !important;
+    color: #f43f5e !important;
+}
+
+.demo-label {
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.35);
+    margin-bottom: 20px;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) {
+    gap: 0.6rem !important;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button {
+    background: rgba(255,255,255,.03) !important;
+    border: 1px solid rgba(147,51,234,.25) !important;
+    border-radius: 14px !important;
+    color: rgba(255,255,255,.85) !important;
+    font-weight: 600 !important;
+    font-size: .92rem !important;
+    padding: 1.1rem .6rem !important;
+    height: auto !important;
+    min-height: 70px !important;
+    white-space: pre-line !important;
+    line-height: 1.5 !important;
+    transition: background .25s, border-color .25s, box-shadow .25s, transform .25s !important;
+    width: 100% !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:hover {
+    background: rgba(147,51,234,.16) !important;
+    border-color: #c084fc !important;
+    box-shadow: 0 0 16px rgba(147,51,234,.35) !important;
+    transform: translateY(-2px);
+}
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus,
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus-visible,
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:active,
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus:not(:active) {
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(147,51,234,.4) !important;
+    border: 1px solid #c084fc !important;
+    color: rgba(255,255,255,.85) !important;
+}
+
+[data-testid="stAlert"],
+[data-testid="stAlert"] > div,
+[data-testid="stAlertContainer"] {
+    background-color: rgba(6,182,212,.12) !important;
+    background: rgba(6,182,212,.12) !important;
+    border: 1px solid rgba(6,182,212,.35) !important;
+    border-radius: 10px !important;
+}
+[data-testid="stAlert"] *,
+[data-testid="stAlert"] p,
+[data-testid="stAlert"] strong,
+[data-testid="stAlert"] span,
+[data-testid="stAlert"] div {
+    color: #67e8f9 !important;
+}
+[data-testid="stAlert"] svg,
+[data-testid="stAlertContainer"] svg {
+    display: none !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -333,6 +490,7 @@ CRITICAL RULES:
 5. Status must be exactly: DONE, IN_PROGRESS, or NEW_TASK.
 6. FOR EACH TASK ALSO RETURN:
 - utterance_index (integer)
+7. The transcript may be in any language (English, Armenian, Russian, etc.) — extract tasks regardless of language but write the "text" output field in English.
 
 Return ONLY a valid JSON object.
 Transcript:
@@ -356,7 +514,13 @@ JSON format:
             temperature=0, response_format={"type": "json_object"}
         )
         return json.loads(resp.choices[0].message.content).get("tasks", [])
-    except Exception: return []
+    except Exception as e:
+        err_msg = str(e)
+        if "429" in err_msg or "rate" in err_msg.lower():
+            st.session_state["groq_api_status"] = "RATE_LIMIT"
+        else:
+            st.session_state["groq_api_status"] = f"ERROR: {err_msg[:50]}"
+        return []
 
 # ─── Jira Logic ───────────────────────────────────────────────────────────────
 def create_jira_issue(summary: str, description: str = ""):
@@ -402,7 +566,7 @@ if "synced_results" not in st.session_state: st.session_state.synced_results = [
 _logo_path = Path("meetask_logo-removebg-preview.png")
 if _logo_path.exists():
     _logo_b64 = base64.b64encode(_logo_path.read_bytes()).decode()
-    _logo_html = f'<div class="hero-logo-wrap"><img src="data:image/png;base64,{_logo_b64}" alt="meetask" style="height:160px;mix-blend-mode:screen;filter:drop-shadow(0 0 35px rgba(6,182,212,.9)) drop-shadow(0 0 20px rgba(147,51,234,.8));"></div>'
+    _logo_html = f'<div class="hero-logo-wrap"><img src="data:image/png;base64,{_logo_b64}" alt="meetask" style="height:180px;mix-blend-mode:screen;filter:drop-shadow(0 0 35px rgba(6,182,212,.9)) drop-shadow(0 0 20px rgba(147,51,234,.8));"></div>'
 else:
     _logo_html = '<div class="hero-logo-wrap"><h1 style="font-family:\'Syne\',sans-serif;font-size:3.2rem;font-weight:800;background:linear-gradient(90deg,#fff 0%,#c084fc 35%,#67e8f9 65%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0 0 .8rem">meetask</h1></div>'
 
@@ -411,7 +575,7 @@ st.markdown(f"""
 <div class="hero-blob1"></div><div class="hero-blob2"></div>
 <div class="hero-tag"><div class="hero-dot"></div>AI-Powered · Real-time · Jira-ready</div>
 {_logo_html}
-<p style="color:rgba(255,255,255,.9);font-size:1.45rem;font-weight:600;margin:.8rem 0 .5rem;text-align:center;line-height:1.5">Turning meeting recordings into structured Jira tasks — automatically.</p>
+<p class="hero-welcome">Welcome! This tool turns your meeting recordings into structured Jira tasks <span style = "font-style:italic">automatically<span/>.</p>
 <p style="color:rgba(255,255,255,.38);font-size:0.95rem;margin:0 auto .8rem;text-align:center;max-width:520px;line-height:1.7">Upload an audio file, let AI transcribe and identify who said what,<br>review the extracted tasks, then push them to Jira in one click.</p>
 <div class="hero-roadmap">
     <div class="hstep"><div class="hstep-n">1</div><div class="hstep-t">Upload<br>Recording</div></div>
@@ -430,20 +594,81 @@ st.markdown(f"""
 # ─── Step 1 ───────────────────────────────────────────────────────────────────
 st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">1</div></div><p class="step-title">Upload Recording</p></div>', unsafe_allow_html=True)
+
 uploaded_file = st.file_uploader("Upload audio file", type=["ogg", "mp3", "wav"], label_visibility="collapsed")
+
+if "demo_audio_bytes" in st.session_state and not uploaded_file:
+    import io
+    uploaded_file = io.BytesIO(st.session_state["demo_audio_bytes"])
+    uploaded_file.name = st.session_state["demo_audio_name"]
 
 if uploaded_file:
     size_mb = len(uploaded_file.getvalue()) / (1024 * 1024)
-    st.markdown(f'<div style="background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.35);border-radius:10px;padding:.6rem 1rem;color:#67e8f9;font-size:.9rem">✓ Ready: <strong>{uploaded_file.name}</strong> ({size_mb:.1f} MB)</div>', unsafe_allow_html=True)
+    col_ready, col_clear = st.columns([9.3, 0.7], vertical_alignment="center")
+    with col_ready:
+        st.success(f"Ready: **{uploaded_file.name}** ({size_mb:.1f} MB)")
+    with col_clear:
+        if "demo_audio_bytes" in st.session_state:
+            if st.button("✕", key="clear_demo", use_container_width=True):
+                del st.session_state["demo_audio_bytes"]
+                del st.session_state["demo_audio_name"]
+                st.rerun()
+
+demo_files = {
+    "Sample (Quick Demo)": "audio/Sample Recording.ogg",
+    "Daily Standup": "audio/Daily Standup.mp3",
+    "1:1 Discussion": "audio/1-1 Discussion.mp3",
+    "Sprint Planning": "audio/Sprint Planning.mp3",
+    "Offline Mock Demo": "__offline__",
+}
+
+st.markdown('<div class="demo-section">', unsafe_allow_html=True)
+st.markdown('<p class="demo-label">Pick a demo recording to get started instantly</p>', unsafe_allow_html=True)
+demo_cols = st.columns(len(demo_files))
+for idx, (label, path) in enumerate(demo_files.items()):
+    with demo_cols[idx]:
+        btn_help = "Use this if internet or API is down — works fully offline" if path == "__offline__" else None
+        if st.button(label, key=f"demo_btn_{idx}", use_container_width=True, help=btn_help):
+            if path == "__offline__":
+                mock_segments, mock_tasks = get_mock_demo_data()
+                st.session_state.segments = mock_segments
+                st.session_state.tasks = mock_tasks
+                st.session_state.speaker_colors = {
+                    "Speaker A": "#c084fc", "Speaker B": "#67e8f9", "Speaker C": "#818cf8",
+                    "Speaker D": "#a78bfa", "Speaker E": "#2dd4bf", "Speaker F": "#86efac",
+                }
+                st.session_state.master_select = False
+                st.session_state.final_sync_list = []
+                st.session_state.synced_results = []
+                st.session_state.speaker_mapping = {}
+                if "groq_api_status" in st.session_state:
+                    del st.session_state["groq_api_status"]
+                if "demo_audio_bytes" in st.session_state:
+                    del st.session_state["demo_audio_bytes"]
+                    del st.session_state["demo_audio_name"]
+                st.rerun()
+            elif os.path.exists(path):
+                with open(path, "rb") as f:
+                    st.session_state["demo_audio_bytes"] = f.read()
+                    st.session_state["demo_audio_name"] = os.path.basename(path)
+                st.rerun()
+            else:
+                st.error(f"Demo file not found: {path}")
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
+
 
 # ─── Step 2 ───────────────────────────────────────────────────────────────────
-st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">2</div></div><p class="step-title">Transcribe &amp; Extract</p></div>', unsafe_allow_html=True)
 
 if st.button("Run AI Processing", type="primary", disabled=not uploaded_file):
     proc_ph = st.empty()
     proc_ph.markdown(render_proc_steps(0), unsafe_allow_html=True)
 
+    if not uploaded_file:
+        st.error("No file found. Please re-upload the audio file.")
+        st.stop()
     temp_path = f"temp_{uuid.uuid4().hex}.wav"
     Path(temp_path).write_bytes(uploaded_file.getvalue())
 
@@ -573,8 +798,17 @@ if unique_speakers:
         cols = [col_spk]
     else:
         cols = st.columns(n, gap="large")
+
+
+    example_names = ["John", "Maria", "Alex", "Sarah", "David", "Emma", "Michael", "Sophia"]
     for idx, old_name in enumerate(unique_speakers):
-        new_name = cols[idx].text_input(f"Name for {old_name}", value=old_name, key=f"spk_name_{idx}")
+        placeholder_name = example_names[idx % len(example_names)]
+        new_name = cols[idx].text_input(
+            f"Name for {old_name}",
+            value="",
+            placeholder=f"E.g. {placeholder_name}",
+            key=f"spk_name_{idx}"
+        )
         speaker_mapping[old_name] = new_name.strip() if new_name.strip() else old_name
 
 # ─── Transcript Display ───────────────────────────────────────────────────────
@@ -710,8 +944,14 @@ if st.session_state.segments:
     st.markdown('<div class="transcript-box">' + "".join(lines_html) + "</div>", unsafe_allow_html=True)
 
 # ─── Step 3 & Step 4 (Review & Sync) ──────────────────────────────────────────
-if st.session_state.tasks:
+
     st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
+    if st.session_state.get("groq_api_status") == "RATE_LIMIT":
+        st.error("🚨 **Groq API Rate Limit Exceeded (Սխալ 429):** Այսօր շատ փորձարկելու պատճառով սերվերը քեզ ժամանակավորապես սառեցրել է։ Սպասիր 1 րոպե կամ օգտագործիր Mock տարբերակը։")
+    elif "groq_api_status" in st.session_state:
+        st.error(f"🚨 **Groq API Ձախողում:** {st.session_state['groq_api_status']}")
+
+if st.session_state.tasks:    
     st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">3</div></div><p class="step-title">Review Tasks</p></div>', unsafe_allow_html=True)
 
     col_m1, col_m2, col_m3 = st.columns([0.45, 0.55, 8.5])
@@ -731,7 +971,7 @@ if st.session_state.tasks:
 
     for i, t in enumerate(st.session_state.tasks):
         task_id = t["id"]
-        task_text = t["text"]
+        task_text = t["text"].strip().capitalize()
 
         for old_spk, new_name in speaker_mapping.items():
             task_text = task_text.replace(old_spk, new_name)
@@ -768,6 +1008,8 @@ if st.session_state.tasks:
                 curr_status = t["status"]
                 default_idx = 0 if curr_status == "NEW_TASK" else 1 if curr_status == "IN_PROGRESS" else 2
                 stat = st.selectbox("", ["To Do", "In Progress", "Done"], index=default_idx, key=f"st_{task_id}", label_visibility="collapsed")
+                status_map_rev = {"To Do": "NEW_TASK", "In Progress": "IN_PROGRESS", "Done": "DONE"}
+                t["status"] = status_map_rev[stat]
             with sub_c3:
                 st.markdown('<div class="del-btn-wrap">', unsafe_allow_html=True)
                 if st.button("✕", key=f"del_task_{task_id}"):
@@ -846,6 +1088,7 @@ if st.session_state.tasks:
                 )
 
     # ─── Step 4 ───────────────────────────────────────────────────────────────────
+    st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
     st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">4</div></div><p class="step-title">Send to Jira</p></div>', unsafe_allow_html=True)
     
     if st.button("Sync Selected Tasks to Jira", type="primary", disabled=not st.session_state.final_sync_list):
