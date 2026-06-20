@@ -450,6 +450,22 @@ div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus:
 [data-testid="stAlertContainer"] svg {
     display: none !important;
 }
+
+[data-testid="stFileUploaderDropzoneInstructions"] > div > span {
+    font-size: 0 !important;
+}
+[data-testid="stFileUploaderDropzoneInstructions"] > div > span::before {
+    content: "Drag and drop file here";
+    font-size: 1rem;
+    font-weight: 600;
+}
+[data-testid="stFileUploaderDropzoneInstructions"] small {
+    font-size: 0 !important;
+}
+[data-testid="stFileUploaderDropzoneInstructions"] small::before {
+    content: "Limit 200MB per file • OGG, MP3, WAV";
+    font-size: .85rem;
+}
 </style>
 """, unsafe_allow_html=True)
 
