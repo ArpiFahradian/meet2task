@@ -451,20 +451,28 @@ div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus:
     display: none !important;
 }
 
-[data-testid="stFileUploaderDropzoneInstructions"] > div > span {
-    font-size: 0 !important;
+[data-testid="stFileUploaderDropzoneInstructions"] {
+    visibility: hidden !important;
+    position: relative !important;
 }
-[data-testid="stFileUploaderDropzoneInstructions"] > div > span::before {
-    content: "Drag and drop file here";
+[data-testid="stFileUploaderDropzoneInstructions"]::before {
+    visibility: visible !important;
+    content: " Drag and drop file here";
+    position: absolute;
+    left: 0;
+    top: 0;
     font-size: 1rem;
     font-weight: 600;
+    color: rgba(255,255,255,.9);
 }
-[data-testid="stFileUploaderDropzoneInstructions"] small {
-    font-size: 0 !important;
-}
-[data-testid="stFileUploaderDropzoneInstructions"] small::before {
+[data-testid="stFileUploaderDropzoneInstructions"]::after {
+    visibility: visible !important;
     content: "Limit 200MB per file • OGG, MP3, WAV";
+    position: absolute;
+    left: 0;
+    top: 26px;
     font-size: .85rem;
+    color: rgba(255,255,255,.4);
 }
 </style>
 """, unsafe_allow_html=True)
