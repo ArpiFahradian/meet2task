@@ -604,11 +604,21 @@ st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-
 
 uploaded_file = st.file_uploader("Upload audio file", type=["ogg", "mp3", "wav"], label_visibility="collapsed")
 
-if uploaded_file:
-    size_mb = len(uploaded_file.getvalue()) / (1024 * 1024)
+if uploaded_file or st.session_state.get("demo_audio_bytes"):
+    
+    file_name = uploaded_file.name if uploaded_file else st.session_state.get("demo_audio_name", "demo_audio")
+    
+    size_bytes = (
+        len(uploaded_file.getvalue()) 
+        if uploaded_file 
+        else len(st.session_state["demo_audio_bytes"])
+    )
+    size_mb = size_bytes / (1024 * 1024)
+
     col_ready, col_clear = st.columns([9.3, 0.7], vertical_alignment="center")
+
     with col_ready:
-        st.success(f"Ready: **{uploaded_file.name}** ({size_mb:.1f} MB)")
+        st.success(f"Ready: **{file_name}** ({size_mb:.1f} MB)")
     with col_clear:
         if "demo_audio_bytes" in st.session_state:
             if st.button("✕", key="clear_demo", use_container_width=True):
@@ -653,6 +663,8 @@ for idx, (label, path) in enumerate(demo_files.items()):
                 with open(path, "rb") as f:
                     st.session_state["demo_audio_bytes"] = f.read()
                     st.session_state["demo_audio_name"] = os.path.basename(path)
+                    st.session_state["active_file_name"] = os.path.basename(path)
+                    st.session_state["active_file_source"] = "demo"
                 st.rerun()
             else:
                 st.error(f"Demo file not found: {path}")
@@ -663,16 +675,17 @@ st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 
 # ─── Step 2 ───────────────────────────────────────────────────────────────────
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">2</div></div><p class="step-title">Transcribe &amp; Extract</p></div>', unsafe_allow_html=True)
+effective_file = uploaded_file or st.session_state.get("demo_audio_bytes")
 
-if st.button("Run AI Processing", type="primary", disabled=not uploaded_file):
+if st.button("Run AI Processing", type="primary", disabled=not effective_file):
     proc_ph = st.empty()
     proc_ph.markdown(render_proc_steps(0), unsafe_allow_html=True)
 
-    if not uploaded_file:
+    if not effective_file:
         st.error("No file found. Please re-upload the audio file.")
         st.stop()
     temp_path = f"temp_{uuid.uuid4().hex}.wav"
-    Path(temp_path).write_bytes(uploaded_file.getvalue())
+    Path(temp_path).write_bytes(effective_file if hasattr(effective_file, "getvalue") else effective_file)
 
     try:
         config = aai.TranscriptionConfig(speaker_labels=True)
@@ -980,8 +993,7 @@ if st.session_state.tasks:
 
         st.markdown(f"<div id='task_anchor_{i}' class='anchor-section'>", unsafe_allow_html=True)
         col_num, col_check, col_content = st.columns(
-            [0.45, 0.45, 9.1],
-            vertical_alignment="center"
+            [0.45, 0.45, 9.1]
         )
 
         with col_num:
