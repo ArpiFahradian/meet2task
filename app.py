@@ -36,429 +36,429 @@ PROJECT_KEY = clean_env_val("JIRA_PROJECT_KEY")
 base_url = f"https://{JIRA_DOMAIN}" if JIRA_DOMAIN else ""
 
 # ──── CSS ──────────────────────────────────────────────────────────────────────
-# st.markdown("""
-# <style>
-# @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap');
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap');
 
-# html, body, [data-testid="stAppViewContainer"] p, div, h1, h2, h3, h4, span, label {
-#     font-family: 'Space Grotesk', sans-serif !important
-# }
-# footer,#MainMenu,.stDeployButton{visibility:hidden!important}
-# [data-testid="stMain"]>div{padding:1.5rem 3rem 5rem}
-# [data-testid="stMainBlockContainer"] {
-#     max-width: 80% !important;
-#     margin-left: auto !important;
-#     margin-right: auto !important;
-#     padding-left: 2rem !important;
-#     padding-right: 2rem !important;
-# }
-# html{scroll-behavior:smooth}
+html, body, [data-testid="stAppViewContainer"] p, div, h1, h2, h3, h4, span, label {
+    font-family: 'Space Grotesk', sans-serif !important
+}
+footer,#MainMenu,.stDeployButton{visibility:hidden!important}
+[data-testid="stMain"]>div{padding:1.5rem 3rem 5rem}
+[data-testid="stMainBlockContainer"] {
+    max-width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+html{scroll-behavior:smooth}
 
-# [data-testid="stAppViewContainer"]{background:linear-gradient(-45deg,#07010f,#0a0e1a,#020b14,#0d0320,#040d1a);background-size:400% 400%;animation:aurora 18s ease infinite}
+[data-testid="stAppViewContainer"]{background:linear-gradient(-45deg,#07010f,#0a0e1a,#020b14,#0d0320,#040d1a);background-size:400% 400%;animation:aurora 18s ease infinite}
 
-# @keyframes heroBreath{0%,100%{box-shadow:0 0 80px rgba(147,51,234,.1)}50%{box-shadow:0 0 120px rgba(147,51,234,.18)}}
-# @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(20px,-15px) scale(1.05)}66%{transform:translate(-10px,10px) scale(.97)}}
+@keyframes heroBreath{0%,100%{box-shadow:0 0 80px rgba(147,51,234,.1)}50%{box-shadow:0 0 120px rgba(147,51,234,.18)}}
+@keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(20px,-15px) scale(1.05)}66%{transform:translate(-10px,10px) scale(.97)}}
 
-# .hero{position:relative;overflow:hidden;background:rgba(255,255,255,.018);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:3.5rem 3rem 3rem;margin-bottom:2.5rem;animation:heroBreath 5s ease-in-out infinite}
-# .hero-blob1{position:absolute;top:-80px;left:-60px;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(147,51,234,.2) 0%,transparent 70%);animation:blobFloat 9s ease-in-out infinite;pointer-events:none}
-# .hero-blob2{position:absolute;bottom:-100px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.15) 0%,transparent 70%);animation:blobFloat 7s ease-in-out infinite reverse;pointer-events:none}
-# .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(147,51,234,.15);border:1px solid rgba(147,51,234,.35);color:#c084fc;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:1.2rem}
-# .hero p{color:rgba(255,255,255,.38);font-size:.95rem;line-height:1.7;margin:0}
+.hero{position:relative;overflow:hidden;background:rgba(255,255,255,.018);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:3.5rem 3rem 3rem;margin-bottom:2.5rem;animation:heroBreath 5s ease-in-out infinite}
+.hero-blob1{position:absolute;top:-80px;left:-60px;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(147,51,234,.2) 0%,transparent 70%);animation:blobFloat 9s ease-in-out infinite;pointer-events:none}
+.hero-blob2{position:absolute;bottom:-100px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.15) 0%,transparent 70%);animation:blobFloat 7s ease-in-out infinite reverse;pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(147,51,234,.15);border:1px solid rgba(147,51,234,.35);color:#c084fc;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:1.2rem}
+.hero p{color:rgba(255,255,255,.38);font-size:.95rem;line-height:1.7;margin:0}
 
-# @keyframes spinRing{to{transform:rotate(360deg)}}
-# .step-wrap{display:flex;align-items:center;gap:.9rem;margin:2.5rem 0 1.8rem;padding-left:0.5rem}
-# .step-num-wrap{position:relative;width:36px;height:36px;flex-shrink:0}
-# .step-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#9333ea,#ec4899,#06b6d4,#9333ea);animation:spinRing 3s linear infinite}
-# .step-num-inner{position:absolute;inset:2px;border-radius:50%;background:#0a0114;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff}
-# .step-title{font-size:1.05rem;font-weight:600;color:rgba(255,255,255,.85);margin:0}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+.step-wrap{display:flex;align-items:center;gap:.9rem;margin:2.5rem 0 1.8rem;padding-left:0.5rem}
+.step-num-wrap{position:relative;width:36px;height:36px;flex-shrink:0}
+.step-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#9333ea,#ec4899,#06b6d4,#9333ea);animation:spinRing 3s linear infinite}
+.step-num-inner{position:absolute;inset:2px;border-radius:50%;background:#0a0114;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff}
+.step-title{font-size:1.05rem;font-weight:600;color:rgba(255,255,255,.85);margin:0}
 
-# [data-testid="stFileUploader"] > section {
-#     border: 2px dashed rgba(147,51,234,0.35) !important;
-#     border-radius: 16px !important;
-#     background: rgba(147,51,234,0.04) !important;
-#     padding: 20px !important;
-# }
+[data-testid="stFileUploader"] > section {
+    border: 2px dashed rgba(147,51,234,0.35) !important;
+    border-radius: 16px !important;
+    background: rgba(147,51,234,0.04) !important;
+    padding: 20px !important;
+}
 
-# .stButton>button[kind="primary"]{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;border:none!important;color:#fff!important;font-weight:700!important;font-size:.9rem!important;border-radius:12px!important;padding:.7rem 2rem!important;outline:none!important;box-shadow:none!important}
-# .stButton>button[kind="primary"]:hover{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;color:#fff!important;box-shadow:0 0 20px rgba(147,51,234,.5)!important;outline:none!important}
-# .stButton>button[kind="primary"]:focus,
-# .stButton>button[kind="primary"]:focus-visible,
-# .stButton>button[kind="primary"]:active{
-#     outline:none!important;
-#     box-shadow:0 0 0 2px rgba(147,51,234,.5)!important;
-#     color:#fff!important;
-# }
-# .stButton>button[kind="primary"]:disabled{
-#     background:rgba(147,51,234,.2)!important;
-#     color:rgba(255,255,255,.3)!important;
-#     box-shadow:none!important;
-# }
-# input,[data-testid="stTextInput"] input{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;color:rgba(255,255,255,.85)!important;height:38px!important}
-# [data-testid="stSelectbox"]>div>div{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;color:rgba(255,255,255,.85)!important;height:38px!important}
+.stButton>button[kind="primary"]{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;border:none!important;color:#fff!important;font-weight:700!important;font-size:.9rem!important;border-radius:12px!important;padding:.7rem 2rem!important;outline:none!important;box-shadow:none!important}
+.stButton>button[kind="primary"]:hover{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;color:#fff!important;box-shadow:0 0 20px rgba(147,51,234,.5)!important;outline:none!important}
+.stButton>button[kind="primary"]:focus,
+.stButton>button[kind="primary"]:focus-visible,
+.stButton>button[kind="primary"]:active{
+    outline:none!important;
+    box-shadow:0 0 0 2px rgba(147,51,234,.5)!important;
+    color:#fff!important;
+}
+.stButton>button[kind="primary"]:disabled{
+    background:rgba(147,51,234,.2)!important;
+    color:rgba(255,255,255,.3)!important;
+    box-shadow:none!important;
+}
+input,[data-testid="stTextInput"] input{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;color:rgba(255,255,255,.85)!important;height:38px!important}
+[data-testid="stSelectbox"]>div>div{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;color:rgba(255,255,255,.85)!important;height:38px!important}
 
-# div[data-testid="stCheckbox"] input[type="checkbox"]{accent-color:#9333ea!important;filter:hue-rotate(60deg) saturate(1.5)!important}
-# # div[data-testid="stCheckbox"]{
-# #     padding:0!important;
-# #     margin:0!important;
-# #     display:flex!important;
-# #     align-items:center!important;
-# #     justify-content:center!important;
-# # }
-
-# .transcript-box{background:rgba(255,255,255,.02);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:1.5rem 1.75rem;max-height:450px;overflow-y:auto}
-# .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.25rem}
-# .metric-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:1.5rem;text-align:center}
-# .metric-val{font-size:2.8rem;font-weight:800;line-height:1;font-family:'Syne',sans-serif}
-# .metric-lbl{font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:.4rem}
-
-# .selected-panel{background:rgba(147,51,234,0.03);border:1px dashed rgba(147,51,234,0.3);border-radius:18px;padding:1.5rem;margin-top:1.5rem}
-# .selected-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:0.8rem;margin-bottom:0.6rem}
-# .selected-title{font-size:1.1rem;font-weight:700;color:#fff;margin:0}
-# .selected-count-badge{background:linear-gradient(135deg,#9333ea,#06b6d4);color:#fff;font-size:0.8rem;font-weight:700;padding:3px 12px;border-radius:20px}
-# .badge-status{font-size:0.7rem;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:6px;letter-spacing:0.5px}
-
-# div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizontalBlock"]{background:rgba(255,255,255,0.02)!important;border:1px solid rgba(255,255,255,0.05)!important;border-radius:10px!important;padding:0.15rem 0.5rem!important;margin-bottom:3px!important}
-
-# .hero-roadmap{display:flex;align-items:center;justify-content:center;gap:0;margin-top:2rem}
-# .hstep{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.4rem 1.6rem;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(147,51,234,.2);min-width:120px;text-align:center}
-# .hstep-n{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff}
-# .hstep-t{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.7);line-height:1.4}
-# .hstep-conn{display:flex;align-items:center;padding-bottom:1.5rem}
-# .hstep-line{width:28px;height:1.5px;background:linear-gradient(90deg,rgba(147,51,234,.35),rgba(6,182,212,.35))}
-# .hstep-tip{width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid rgba(6,182,212,.4)}
-# .hero-logo-wrap{text-align:center;margin-bottom:.6rem}
-
-# .sup-badge{font-size:0.68rem;vertical-align:super;font-weight:800;background:rgba(0,0,0,0.18);padding:2px 6px;border-radius:4px;margin-left:4px;color:#000000!important;text-decoration:none!important;display:inline-block}
-# .sup-badge:hover{background:rgba(0,0,0,0.35)}
-
-# .task-num-link{display:flex;align-items:center;justify-content:center;background:rgba(147,51,234,0.15);border:1px solid rgba(147,51,234,0.35);border-radius:8px;color:#c084fc!important;font-weight:bold;height:32px;width:32px;text-decoration:none!important;transition:all 0.2s;font-size:0.85rem}
-# .task-num-link:hover{background:rgba(147,51,234,0.35);border-color:#c084fc}
-
-# /* === Step 3-ի task տողերը կոմպակտ ենք դարձնում === */
-# div[data-testid="stHorizontalBlock"]{align-items:center!important}
-
-# /* Anchor marker-ի div-ը դարձնում ենք անտեսանելի (height=0) */
-# div[data-testid="stMarkdown"]:has(.anchor-section){
-#     display:none!important;
-#     margin:0!important;
-#     padding:0!important;
-#     height:0!important;
-#     min-height:0!important;
-#     line-height:0!important;
-#     overflow:hidden!important;
-# }
-
-# /* Մարկերից անմիջապես հետո եկող task row-ը կպցնում ենք վերևից */
-# div[data-testid="stMarkdown"]:has(.anchor-section)
-# + div[data-testid="stHorizontalBlock"]{
-#     margin-top:-12px!important;
-#     margin-bottom:-12px!important;
-#     padding-top:0!important;
-#     padding-bottom:0!important;
-# }
-
-# /* Task row-երի ընդհանուր vertical gap-ը կրճատում ենք */
-# div[data-testid="stVerticalBlock"]:has(> div > div[data-testid="stMarkdown"] .anchor-section){
-#     gap:0!important;
-# }
-
-# div[data-testid="stVerticalBlock"]:has(> div > div[data-testid="stMarkdown"] .anchor-section) > div{
-#     gap:0!important;
-#     margin:0!important;
-#     padding:0!important;
-# }
-
-# /* === Selected Tasks for Jira Sync — եզրագծված տուփ === */
-# div[data-testid="stVerticalBlock"]:has(> div:first-child > div[data-testid="stMarkdown"] .sel-panel-marker){
-#     background:rgba(147,51,234,0.05)!important;
-#     border:1px solid rgba(147,51,234,0.4)!important;
-#     border-radius:18px!important;
-#     padding:1.5rem 1.75rem 1.25rem!important;
-#     margin-top:1.5rem!important;
-#     box-shadow:0 4px 20px rgba(147,51,234,0.08)!important;
-# }
-
-# div[data-testid="stMarkdown"]:has(.sel-panel-marker){
-#     margin:0!important;
-#     padding:0!important;
-#     height:0!important;
-#     min-height:0!important;
-#     line-height:0!important;
-#     overflow:hidden!important;
-# }
-
-# div[data-testid="stMarkdown"]:has(.sel-row-marker){
-#     margin:0!important;
-#     padding:0!important;
-#     height:0!important;
-#     min-height:0!important;
-#     line-height:0!important;
-#     overflow:hidden!important;
-# }
-
-# div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizontalBlock"]{
-#     margin-top:0!important;
-#     margin-bottom:4px!important;
-#     padding:0.3rem 0.5rem!important;
-#     background:rgba(255,255,255,0.02)!important;
-#     border-radius:8px!important;
-# }
-
-# .del-btn-wrap button {
-#     height:36px!important;
-#     width:36px!important;
-#     min-width:36px!important;
-#     max-width:36px!important;
-#     padding:0!important;
-#     border-radius:10px!important;
-#     background:rgba(255,255,255,0.05)!important;
-#     border:1px solid rgba(255,255,255,0.12)!important;
-#     color:rgba(255,255,255,0.6)!important;
-#     font-size:1rem!important;
-#     display:flex!important;
-#     align-items:center!important;
-#     justify-content:center!important;
-#     transition:all 0.2s!important;
-#     aspect-ratio: 1 / 1 !important;
-# }
-# .del-btn-wrap button:hover {
-#     background:rgba(244,63,94,0.15)!important;
-#     border-color:#f43f5e!important;
-#     color:#f43f5e!important;
-# }
-
-# @keyframes softWordFlash{0%{background-color:#9333ea!important;color:#fff!important;box-shadow:0 0 20px #9333ea;border-radius:4px}100%{background-color:#bbf7d0;color:#166534}}
-# @keyframes softButtonFlash{0%{background-color:#9333ea!important;border-color:#c084fc!important;box-shadow:0 0 20px #9333ea;transform:scale(1.05)}100%{background-color:rgba(147,51,234,0.15);border-color:rgba(147,51,234,0.35);transform:scale(1)}}
-
-# .word-target:target{animation:softWordFlash 1.8s ease-out forwards;scroll-margin-top:160px}
-# .task-btn-target:target .task-num-link{animation:softButtonFlash 1.8s ease-out forwards;scroll-margin-top:160px}
-
-# .sync-result-row{display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:0.55rem 1rem;margin-bottom:0.4rem}
-# .sync-key-badge{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10b981!important;font-size:0.78rem;font-weight:700;padding:2px 10px;border-radius:6px;text-decoration:none!important;white-space:nowrap}
-# .sync-key-badge:hover{background:rgba(16,185,129,0.3)!important}
-
-# div[data-testid="element-container"]{
-#     margin-bottom:0!important;
-# }
-
-# # div[data-testid="stHorizontalBlock"]{
-# #     margin:0!important;
-# #     padding:0!important;
-# #     min-height:auto!important;
-# #     align-items:center!important;
-# # }
-
-# /* միայն task row-երի համար */
-# div[data-testid="stMarkdown"]:has(.anchor-section)
-# + div[data-testid="stHorizontalBlock"]{
-#     margin-top:-8px!important;
-#     margin-bottom:-8px!important;
-#     padding:0!important;
-# }
-
-# /* task row-ի ներսի column-ները ուղղահայաց կենտրոնացնել */
-# div[data-testid="stMarkdown"]:has(.anchor-section)
-# + div[data-testid="stHorizontalBlock"]
-# > div{
-#     display:flex!important;
-#     align-items:center!important;
-# }
-
-# /* checkbox-ը միայն task row-երում */
-# div[data-testid="stMarkdown"]:has(.anchor-section)
-# + div[data-testid="stHorizontalBlock"]
+div[data-testid="stCheckbox"] input[type="checkbox"]{accent-color:#9333ea!important;filter:hue-rotate(60deg) saturate(1.5)!important}
 # div[data-testid="stCheckbox"]{
+#     padding:0!important;
+#     margin:0!important;
+#     display:flex!important;
+#     align-items:center!important;
+#     justify-content:center!important;
+# }
+
+.transcript-box{background:rgba(255,255,255,.02);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:1.5rem 1.75rem;max-height:450px;overflow-y:auto}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.25rem}
+.metric-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:1.5rem;text-align:center}
+.metric-val{font-size:2.8rem;font-weight:800;line-height:1;font-family:'Syne',sans-serif}
+.metric-lbl{font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:.4rem}
+
+.selected-panel{background:rgba(147,51,234,0.03);border:1px dashed rgba(147,51,234,0.3);border-radius:18px;padding:1.5rem;margin-top:1.5rem}
+.selected-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:0.8rem;margin-bottom:0.6rem}
+.selected-title{font-size:1.1rem;font-weight:700;color:#fff;margin:0}
+.selected-count-badge{background:linear-gradient(135deg,#9333ea,#06b6d4);color:#fff;font-size:0.8rem;font-weight:700;padding:3px 12px;border-radius:20px}
+.badge-status{font-size:0.7rem;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:6px;letter-spacing:0.5px}
+
+div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizontalBlock"]{background:rgba(255,255,255,0.02)!important;border:1px solid rgba(255,255,255,0.05)!important;border-radius:10px!important;padding:0.15rem 0.5rem!important;margin-bottom:3px!important}
+
+.hero-roadmap{display:flex;align-items:center;justify-content:center;gap:0;margin-top:2rem}
+.hstep{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.4rem 1.6rem;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(147,51,234,.2);min-width:120px;text-align:center}
+.hstep-n{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff}
+.hstep-t{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.7);line-height:1.4}
+.hstep-conn{display:flex;align-items:center;padding-bottom:1.5rem}
+.hstep-line{width:28px;height:1.5px;background:linear-gradient(90deg,rgba(147,51,234,.35),rgba(6,182,212,.35))}
+.hstep-tip{width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid rgba(6,182,212,.4)}
+.hero-logo-wrap{text-align:center;margin-bottom:.6rem}
+
+.sup-badge{font-size:0.68rem;vertical-align:super;font-weight:800;background:rgba(0,0,0,0.18);padding:2px 6px;border-radius:4px;margin-left:4px;color:#000000!important;text-decoration:none!important;display:inline-block}
+.sup-badge:hover{background:rgba(0,0,0,0.35)}
+
+.task-num-link{display:flex;align-items:center;justify-content:center;background:rgba(147,51,234,0.15);border:1px solid rgba(147,51,234,0.35);border-radius:8px;color:#c084fc!important;font-weight:bold;height:32px;width:32px;text-decoration:none!important;transition:all 0.2s;font-size:0.85rem}
+.task-num-link:hover{background:rgba(147,51,234,0.35);border-color:#c084fc}
+
+/* === Step 3-ի task տողերը կոմպակտ ենք դարձնում === */
+div[data-testid="stHorizontalBlock"]{align-items:center!important}
+
+/* Anchor marker-ի div-ը դարձնում ենք անտեսանելի (height=0) */
+div[data-testid="stMarkdown"]:has(.anchor-section){
+    display:none!important;
+    margin:0!important;
+    padding:0!important;
+    height:0!important;
+    min-height:0!important;
+    line-height:0!important;
+    overflow:hidden!important;
+}
+
+/* Մարկերից անմիջապես հետո եկող task row-ը կպցնում ենք վերևից */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]{
+    margin-top:-12px!important;
+    margin-bottom:-12px!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
+}
+
+/* Task row-երի ընդհանուր vertical gap-ը կրճատում ենք */
+div[data-testid="stVerticalBlock"]:has(> div > div[data-testid="stMarkdown"] .anchor-section){
+    gap:0!important;
+}
+
+div[data-testid="stVerticalBlock"]:has(> div > div[data-testid="stMarkdown"] .anchor-section) > div{
+    gap:0!important;
+    margin:0!important;
+    padding:0!important;
+}
+
+/* === Selected Tasks for Jira Sync — եզրագծված տուփ === */
+div[data-testid="stVerticalBlock"]:has(> div:first-child > div[data-testid="stMarkdown"] .sel-panel-marker){
+    background:rgba(147,51,234,0.05)!important;
+    border:1px solid rgba(147,51,234,0.4)!important;
+    border-radius:18px!important;
+    padding:1.5rem 1.75rem 1.25rem!important;
+    margin-top:1.5rem!important;
+    box-shadow:0 4px 20px rgba(147,51,234,0.08)!important;
+}
+
+div[data-testid="stMarkdown"]:has(.sel-panel-marker){
+    margin:0!important;
+    padding:0!important;
+    height:0!important;
+    min-height:0!important;
+    line-height:0!important;
+    overflow:hidden!important;
+}
+
+div[data-testid="stMarkdown"]:has(.sel-row-marker){
+    margin:0!important;
+    padding:0!important;
+    height:0!important;
+    min-height:0!important;
+    line-height:0!important;
+    overflow:hidden!important;
+}
+
+div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizontalBlock"]{
+    margin-top:0!important;
+    margin-bottom:4px!important;
+    padding:0.3rem 0.5rem!important;
+    background:rgba(255,255,255,0.02)!important;
+    border-radius:8px!important;
+}
+
+.del-btn-wrap button {
+    height:36px!important;
+    width:36px!important;
+    min-width:36px!important;
+    max-width:36px!important;
+    padding:0!important;
+    border-radius:10px!important;
+    background:rgba(255,255,255,0.05)!important;
+    border:1px solid rgba(255,255,255,0.12)!important;
+    color:rgba(255,255,255,0.6)!important;
+    font-size:1rem!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    transition:all 0.2s!important;
+    aspect-ratio: 1 / 1 !important;
+}
+.del-btn-wrap button:hover {
+    background:rgba(244,63,94,0.15)!important;
+    border-color:#f43f5e!important;
+    color:#f43f5e!important;
+}
+
+@keyframes softWordFlash{0%{background-color:#9333ea!important;color:#fff!important;box-shadow:0 0 20px #9333ea;border-radius:4px}100%{background-color:#bbf7d0;color:#166534}}
+@keyframes softButtonFlash{0%{background-color:#9333ea!important;border-color:#c084fc!important;box-shadow:0 0 20px #9333ea;transform:scale(1.05)}100%{background-color:rgba(147,51,234,0.15);border-color:rgba(147,51,234,0.35);transform:scale(1)}}
+
+.word-target:target{animation:softWordFlash 1.8s ease-out forwards;scroll-margin-top:160px}
+.task-btn-target:target .task-num-link{animation:softButtonFlash 1.8s ease-out forwards;scroll-margin-top:160px}
+
+.sync-result-row{display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:0.55rem 1rem;margin-bottom:0.4rem}
+.sync-key-badge{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10b981!important;font-size:0.78rem;font-weight:700;padding:2px 10px;border-radius:6px;text-decoration:none!important;white-space:nowrap}
+.sync-key-badge:hover{background:rgba(16,185,129,0.3)!important}
+
+div[data-testid="element-container"]{
+    margin-bottom:0!important;
+}
+
+# div[data-testid="stHorizontalBlock"]{
 #     margin:0!important;
 #     padding:0!important;
-#     display:flex!important;
+#     min-height:auto!important;
 #     align-items:center!important;
-#     justify-content:center!important;
 # }
 
-# /* delete button-ը միայն task row-երում */
-# div[data-testid="stMarkdown"]:has(.anchor-section)
-# + div[data-testid="stHorizontalBlock"]
-# button{
-#     height:38px!important;
-#     width:38px!important;
-#     min-width:38px!important;
-#     max-width:38px!important;
-#     padding:0!important;
-#     border-radius:10px!important;
-#     display:flex!important;
-#     align-items:center!important;
-#     justify-content:center!important;
-# }
+/* միայն task row-երի համար */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]{
+    margin-top:-8px!important;
+    margin-bottom:-8px!important;
+    padding:0!important;
+}
 
-# [data-testid="stTextInput"] {
-#     margin-bottom: 0.5rem !important;
-# }
-# [data-testid="stTextInput"] label {
-#     font-size: 0.78rem !important;
-#     color: rgba(255,255,255,0.4) !important;
-#     margin-bottom: 4px !important;
-#     letter-spacing: 0.5px !important;
-# }
+/* task row-ի ներսի column-ները ուղղահայաց կենտրոնացնել */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]
+> div{
+    display:flex!important;
+    align-items:center!important;
+}
 
-# .step-divider {
-#     border: none;
-#     height: 1px;
-#     background: linear-gradient(90deg, transparent, rgba(147,51,234,0.5), rgba(6,182,212,0.4), transparent);
-#     margin: 7px 0 0 0;
-#     box-shadow: 0 0 8px rgba(147,51,234,0.3);
-# }
+/* checkbox-ը միայն task row-երում */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]
+div[data-testid="stCheckbox"]{
+    margin:0!important;
+    padding:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+}
 
-# .hero-welcome{
-#     display:block !important;
+/* delete button-ը միայն task row-երում */
+div[data-testid="stMarkdown"]:has(.anchor-section)
++ div[data-testid="stHorizontalBlock"]
+button{
+    height:38px!important;
+    width:38px!important;
+    min-width:38px!important;
+    max-width:38px!important;
+    padding:0!important;
+    border-radius:10px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+}
 
-#     width:100% !important;
-#     max-width:900px !important;
+[data-testid="stTextInput"] {
+    margin-bottom: 0.5rem !important;
+}
+[data-testid="stTextInput"] label {
+    font-size: 0.78rem !important;
+    color: rgba(255,255,255,0.4) !important;
+    margin-bottom: 4px !important;
+    letter-spacing: 0.5px !important;
+}
 
-#     margin-left:auto !important;
-#     margin-right:auto !important;
+.step-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(147,51,234,0.5), rgba(6,182,212,0.4), transparent);
+    margin: 7px 0 0 0;
+    box-shadow: 0 0 8px rgba(147,51,234,0.3);
+}
 
-#     text-align:center !important;
+.hero-welcome{
+    display:block !important;
 
-#     font-size:1.55rem !important;
-#     font-weight:700 !important;
+    width:100% !important;
+    max-width:900px !important;
 
-#     color:rgba(240, 240, 240, 0.6) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
 
-#     line-height:1.55 !important;
-#     padding:10px 0
-# }
+    text-align:center !important;
 
-# .demo-section {
-#     margin-top: 1.2rem;
-#     padding-top: 1rem;
-#     # background: rgba(255,255,255,.02);
-#     # border: 1px dashed rgba(147,51,234,.25);
-#     border-radius: 16px;
-# }
+    font-size:1.55rem !important;
+    font-weight:700 !important;
 
-# .ready-badge-full {
-#     width: 100%;
-#     height: 44px;
-#     background: rgba(6,182,212,.12);
-#     border: 1px solid rgba(6,182,212,.35);
-#     border-radius: 10px;
-#     padding: 0 1rem;
-#     color: #67e8f9;
-#     font-size: .9rem;
-#     box-sizing: border-box;
-#     display: flex;
-#     align-items: center;
-# }
-# div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) {
-#     align-items: stretch !important;
-# }
-# div[data-testid="stButton"]:has(button[key="clear_demo"]) {
-#     height: 100%;
-#     display: flex;
-# }
-# div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) {
-#     align-items: stretch !important;
-# }
-# div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) > div[data-testid="column"] {
-#     display: flex !important;
-#     flex-direction: column !important;
-#     justify-content: center !important;
-# }
-# div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) div[data-testid="stButton"] {
-#     height: 44px !important;
-# }
-# button[key="clear_demo"] {
-#     height: 100% !important;
-#     min-height: 44px !important;
-#     border-radius: 10px !important;
-#     background: rgba(255,255,255,.05) !important;
-#     border: 1px solid rgba(255,255,255,.15) !important;
-#     color: rgba(255,255,255,.7) !important;
-#     display: flex !important;
-#     align-items: center !important;
-#     justify-content: center !important;
-#     padding: 0 !important;
-#     width: 100% !important;
-#     box-sizing: border-box !important;
-# }
-# button[key="clear_demo"]:hover {
-#     background: rgba(244,63,94,.15) !important;
-#     border-color: #f43f5e !important;
-#     color: #f43f5e !important;
-# }
+    color:rgba(240, 240, 240, 0.6) !important;
 
-# .demo-label {
-#     font-size: .78rem;
-#     font-weight: 600;
-#     letter-spacing: 1px;
-#     text-transform: uppercase;
-#     color: rgba(255,255,255,.35);
-#     margin-bottom: 20px;
-# }
-# div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) {
-#     gap: 0.6rem !important;
-# }
-# div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button {
-#     background: rgba(255,255,255,.03) !important;
-#     border: 1px solid rgba(147,51,234,.25) !important;
-#     border-radius: 14px !important;
-#     color: rgba(255,255,255,.85) !important;
-#     font-weight: 600 !important;
-#     font-size: .92rem !important;
-#     padding: 1.1rem .6rem !important;
-#     height: auto !important;
-#     min-height: 70px !important;
-#     white-space: pre-line !important;
-#     line-height: 1.5 !important;
-#     transition: background .25s, border-color .25s, box-shadow .25s, transform .25s !important;
-#     width: 100% !important;
-#     outline: none !important;
-#     box-shadow: none !important;
-# }
-# div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:hover {
-#     background: rgba(147,51,234,.16) !important;
-#     border-color: #c084fc !important;
-#     box-shadow: 0 0 16px rgba(147,51,234,.35) !important;
-#     transform: translateY(-2px);
-# }
-# div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus,
-# div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus-visible,
-# div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:active,
-# div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus:not(:active) {
-#     outline: none !important;
-#     box-shadow: 0 0 0 2px rgba(147,51,234,.4) !important;
-#     border: 1px solid #c084fc !important;
-#     color: rgba(255,255,255,.85) !important;
-# }
+    line-height:1.55 !important;
+    padding:10px 0
+}
 
-# [data-testid="stAlert"],
-# [data-testid="stAlert"] > div,
-# [data-testid="stAlertContainer"] {
-#     background-color: rgba(6,182,212,.12) !important;
-#     background: rgba(6,182,212,.12) !important;
-#     border: 1px solid rgba(6,182,212,.35) !important;
-#     border-radius: 10px !important;
-# }
-# [data-testid="stAlert"] *,
-# [data-testid="stAlert"] p,
-# [data-testid="stAlert"] strong,
-# [data-testid="stAlert"] span,
-# [data-testid="stAlert"] div {
-#     color: #67e8f9 !important;
-# }
-# [data-testid="stAlert"] svg,
-# [data-testid="stAlertContainer"] svg {
-#     display: none !important;
-# }
+.demo-section {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    # background: rgba(255,255,255,.02);
+    # border: 1px dashed rgba(147,51,234,.25);
+    border-radius: 16px;
+}
 
-# [data-testid="stFileUploader"] > section {
-#     border: 2px dashed rgba(147,51,234,0.35) !important;
-#     border-radius: 16px !important;
-#     background: rgba(147,51,234,0.04) !important;
-#     padding: 20px !important;
-# }
-# </style>
-# """, unsafe_allow_html=True)
+.ready-badge-full {
+    width: 100%;
+    height: 44px;
+    background: rgba(6,182,212,.12);
+    border: 1px solid rgba(6,182,212,.35);
+    border-radius: 10px;
+    padding: 0 1rem;
+    color: #67e8f9;
+    font-size: .9rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) {
+    align-items: stretch !important;
+}
+div[data-testid="stButton"]:has(button[key="clear_demo"]) {
+    height: 100%;
+    display: flex;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) {
+    align-items: stretch !important;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) > div[data-testid="column"] {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key="clear_demo"]) div[data-testid="stButton"] {
+    height: 44px !important;
+}
+button[key="clear_demo"] {
+    height: 100% !important;
+    min-height: 44px !important;
+    border-radius: 10px !important;
+    background: rgba(255,255,255,.05) !important;
+    border: 1px solid rgba(255,255,255,.15) !important;
+    color: rgba(255,255,255,.7) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+button[key="clear_demo"]:hover {
+    background: rgba(244,63,94,.15) !important;
+    border-color: #f43f5e !important;
+    color: #f43f5e !important;
+}
+
+.demo-label {
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.35);
+    margin-bottom: 20px;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) {
+    gap: 0.6rem !important;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button {
+    background: rgba(255,255,255,.03) !important;
+    border: 1px solid rgba(147,51,234,.25) !important;
+    border-radius: 14px !important;
+    color: rgba(255,255,255,.85) !important;
+    font-weight: 600 !important;
+    font-size: .92rem !important;
+    padding: 1.1rem .6rem !important;
+    height: auto !important;
+    min-height: 70px !important;
+    white-space: pre-line !important;
+    line-height: 1.5 !important;
+    transition: background .25s, border-color .25s, box-shadow .25s, transform .25s !important;
+    width: 100% !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:hover {
+    background: rgba(147,51,234,.16) !important;
+    border-color: #c084fc !important;
+    box-shadow: 0 0 16px rgba(147,51,234,.35) !important;
+    transform: translateY(-2px);
+}
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus,
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus-visible,
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:active,
+div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus:not(:active) {
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(147,51,234,.4) !important;
+    border: 1px solid #c084fc !important;
+    color: rgba(255,255,255,.85) !important;
+}
+
+[data-testid="stAlert"],
+[data-testid="stAlert"] > div,
+[data-testid="stAlertContainer"] {
+    background-color: rgba(6,182,212,.12) !important;
+    background: rgba(6,182,212,.12) !important;
+    border: 1px solid rgba(6,182,212,.35) !important;
+    border-radius: 10px !important;
+}
+[data-testid="stAlert"] *,
+[data-testid="stAlert"] p,
+[data-testid="stAlert"] strong,
+[data-testid="stAlert"] span,
+[data-testid="stAlert"] div {
+    color: #67e8f9 !important;
+}
+[data-testid="stAlert"] svg,
+[data-testid="stAlertContainer"] svg {
+    display: none !important;
+}
+
+[data-testid="stFileUploader"] > section {
+    border: 2px dashed rgba(147,51,234,0.35) !important;
+    border-radius: 16px !important;
+    background: rgba(147,51,234,0.04) !important;
+    padding: 20px !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 def fix_word_spacing(text):
