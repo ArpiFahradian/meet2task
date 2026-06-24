@@ -35,7 +35,7 @@ JIRA_TOKEN = clean_env_val("JIRA_API_TOKEN")
 PROJECT_KEY = clean_env_val("JIRA_PROJECT_KEY")
 base_url = f"https://{JIRA_DOMAIN}" if JIRA_DOMAIN else ""
 
-# ──── CSS ──────────────────────────────────────────────────────────────────────
+# ──────────────────────────────── CSS ──────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap');
@@ -78,7 +78,6 @@ html{scroll-behavior:smooth}
     background: rgba(147,51,234,0.04) !important;
     padding: 20px !important;
 }
-
 .stButton>button[kind="primary"]{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;border:none!important;color:#fff!important;font-weight:700!important;font-size:.9rem!important;border-radius:12px!important;padding:.7rem 2rem!important;outline:none!important;box-shadow:none!important}
 .stButton>button[kind="primary"]:hover{background:linear-gradient(90deg,#9333ea,#7c3aed,#06b6d4,#9333ea)!important;background-size:200% auto!important;color:#fff!important;box-shadow:0 0 20px rgba(147,51,234,.5)!important;outline:none!important}
 .stButton>button[kind="primary"]:focus,
@@ -97,13 +96,6 @@ input,[data-testid="stTextInput"] input{background:rgba(255,255,255,.04)!importa
 [data-testid="stSelectbox"]>div>div{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;color:rgba(255,255,255,.85)!important;height:38px!important}
 
 div[data-testid="stCheckbox"] input[type="checkbox"]{accent-color:#9333ea!important;filter:hue-rotate(60deg) saturate(1.5)!important}
-# div[data-testid="stCheckbox"]{
-#     padding:0!important;
-#     margin:0!important;
-#     display:flex!important;
-#     align-items:center!important;
-#     justify-content:center!important;
-# }
 
 .transcript-box{background:rgba(255,255,255,.02);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:1.5rem 1.75rem;max-height:450px;overflow-y:auto}
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.25rem}
@@ -115,10 +107,9 @@ div[data-testid="stCheckbox"] input[type="checkbox"]{accent-color:#9333ea!import
 .selected-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:0.8rem;margin-bottom:0.6rem}
 .selected-title{font-size:1.1rem;font-weight:700;color:#fff;margin:0}
 .selected-count-badge{background:linear-gradient(135deg,#9333ea,#06b6d4);color:#fff;font-size:0.8rem;font-weight:700;padding:3px 12px;border-radius:20px}
+
 .badge-status{font-size:0.7rem;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:6px;letter-spacing:0.5px}
-
 div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizontalBlock"]{background:rgba(255,255,255,0.02)!important;border:1px solid rgba(255,255,255,0.05)!important;border-radius:10px!important;padding:0.15rem 0.5rem!important;margin-bottom:3px!important}
-
 .hero-roadmap{display:flex;align-items:center;justify-content:center;gap:0;margin-top:2rem}
 .hstep{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.4rem 1.6rem;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(147,51,234,.2);min-width:120px;text-align:center}
 .hstep-n{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff}
@@ -133,11 +124,7 @@ div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizont
 
 .task-num-link{display:flex;align-items:center;justify-content:center;background:rgba(147,51,234,0.15);border:1px solid rgba(147,51,234,0.35);border-radius:8px;color:#c084fc!important;font-weight:bold;height:32px;width:32px;text-decoration:none!important;transition:all 0.2s;font-size:0.85rem}
 .task-num-link:hover{background:rgba(147,51,234,0.35);border-color:#c084fc}
-
-/* === Step 3-ի task տողերը կոմպակտ ենք դարձնում === */
 div[data-testid="stHorizontalBlock"]{align-items:center!important}
-
-/* Anchor marker-ի div-ը դարձնում ենք անտեսանելի (height=0) */
 div[data-testid="stMarkdown"]:has(.anchor-section){
     display:none!important;
     margin:0!important;
@@ -147,8 +134,6 @@ div[data-testid="stMarkdown"]:has(.anchor-section){
     line-height:0!important;
     overflow:hidden!important;
 }
-
-/* Մարկերից անմիջապես հետո եկող task row-ը կպցնում ենք վերևից */
 div[data-testid="stMarkdown"]:has(.anchor-section)
 + div[data-testid="stHorizontalBlock"]{
     margin-top:-12px!important;
@@ -156,19 +141,14 @@ div[data-testid="stMarkdown"]:has(.anchor-section)
     padding-top:0!important;
     padding-bottom:0!important;
 }
-
-/* Task row-երի ընդհանուր vertical gap-ը կրճատում ենք */
 div[data-testid="stVerticalBlock"]:has(> div > div[data-testid="stMarkdown"] .anchor-section){
     gap:0!important;
 }
-
 div[data-testid="stVerticalBlock"]:has(> div > div[data-testid="stMarkdown"] .anchor-section) > div{
     gap:0!important;
     margin:0!important;
     padding:0!important;
 }
-
-/* === Selected Tasks for Jira Sync — եզրագծված տուփ === */
 div[data-testid="stVerticalBlock"]:has(> div:first-child > div[data-testid="stMarkdown"] .sel-panel-marker){
     background:rgba(147,51,234,0.05)!important;
     border:1px solid rgba(147,51,234,0.4)!important;
@@ -177,7 +157,6 @@ div[data-testid="stVerticalBlock"]:has(> div:first-child > div[data-testid="stMa
     margin-top:1.5rem!important;
     box-shadow:0 4px 20px rgba(147,51,234,0.08)!important;
 }
-
 div[data-testid="stMarkdown"]:has(.sel-panel-marker){
     margin:0!important;
     padding:0!important;
@@ -186,7 +165,6 @@ div[data-testid="stMarkdown"]:has(.sel-panel-marker){
     line-height:0!important;
     overflow:hidden!important;
 }
-
 div[data-testid="stMarkdown"]:has(.sel-row-marker){
     margin:0!important;
     padding:0!important;
@@ -195,7 +173,6 @@ div[data-testid="stMarkdown"]:has(.sel-row-marker){
     line-height:0!important;
     overflow:hidden!important;
 }
-
 div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizontalBlock"]{
     margin-top:0!important;
     margin-bottom:4px!important;
@@ -203,7 +180,6 @@ div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizont
     background:rgba(255,255,255,0.02)!important;
     border-radius:8px!important;
 }
-
 .del-btn-wrap button {
     height:36px!important;
     width:36px!important;
@@ -227,7 +203,13 @@ div[data-testid="stMarkdown"]:has(.sel-row-marker) + div[data-testid="stHorizont
     color:#f43f5e!important;
 }
 
-@keyframes softWordFlash{0%{background-color:#9333ea!important;color:#fff!important;box-shadow:0 0 20px #9333ea;border-radius:4px}100%{background-color:#bbf7d0;color:#166534}}
+@keyframes softWordFlash{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);
+        box-shadow:0 0 20px rgba(147,51,234,.8);}
+    100%{transform:scale(1);
+        box-shadow:none;}
+}
 @keyframes softButtonFlash{0%{background-color:#9333ea!important;border-color:#c084fc!important;box-shadow:0 0 20px #9333ea;transform:scale(1.05)}100%{background-color:rgba(147,51,234,0.15);border-color:rgba(147,51,234,0.35);transform:scale(1)}}
 
 .word-target:target{animation:softWordFlash 1.8s ease-out forwards;scroll-margin-top:160px}
@@ -241,14 +223,6 @@ div[data-testid="element-container"]{
     margin-bottom:0!important;
 }
 
-# div[data-testid="stHorizontalBlock"]{
-#     margin:0!important;
-#     padding:0!important;
-#     min-height:auto!important;
-#     align-items:center!important;
-# }
-
-/* միայն task row-երի համար */
 div[data-testid="stMarkdown"]:has(.anchor-section)
 + div[data-testid="stHorizontalBlock"]{
     margin-top:-8px!important;
@@ -256,7 +230,6 @@ div[data-testid="stMarkdown"]:has(.anchor-section)
     padding:0!important;
 }
 
-/* task row-ի ներսի column-ները ուղղահայաց կենտրոնացնել */
 div[data-testid="stMarkdown"]:has(.anchor-section)
 + div[data-testid="stHorizontalBlock"]
 > div{
@@ -264,7 +237,6 @@ div[data-testid="stMarkdown"]:has(.anchor-section)
     align-items:center!important;
 }
 
-/* checkbox-ը միայն task row-երում */
 div[data-testid="stMarkdown"]:has(.anchor-section)
 + div[data-testid="stHorizontalBlock"]
 div[data-testid="stCheckbox"]{
@@ -275,7 +247,6 @@ div[data-testid="stCheckbox"]{
     justify-content:center!important;
 }
 
-/* delete button-ը միայն task row-երում */
 div[data-testid="stMarkdown"]:has(.anchor-section)
 + div[data-testid="stHorizontalBlock"]
 button{
@@ -299,7 +270,6 @@ button{
     margin-bottom: 4px !important;
     letter-spacing: 0.5px !important;
 }
-
 .step-divider {
     border: none;
     height: 1px;
@@ -310,20 +280,14 @@ button{
 
 .hero-welcome{
     display:block !important;
-
     width:100% !important;
     max-width:900px !important;
-
     margin-left:auto !important;
     margin-right:auto !important;
-
     text-align:center !important;
-
     font-size:1.55rem !important;
     font-weight:700 !important;
-
     color:rgba(240, 240, 240, 0.6) !important;
-
     line-height:1.55 !important;
     padding:10px 0
 }
@@ -460,7 +424,7 @@ div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus:
 </style>
 """, unsafe_allow_html=True)
 
-# ─── Helpers ──────────────────────────────────────────────────────────────────
+# ────────────────────────── Helpers ───────────────────────────────────────────
 def fix_word_spacing(text):
     return re.sub(r'(\D)(\d)(\w)', r'\1 \2\3', text)
 
@@ -486,7 +450,7 @@ def render_proc_steps(current: int, done: bool = False) -> str:
     border_c = "rgba(16,185,129,0.4)" if done else "rgba(255,255,255,0.08)"
     return f'<div style="background:rgba(255,255,255,0.025);border:1px solid {border_c};border-radius:14px;padding:1rem 1.25rem;margin-bottom:0.5rem;">{rows}</div>'
 
-# ─── Groq Task Extractor ───────────────────────────────────────────────────────
+# ───────────────────── Groq Task Extractor ─────────────────────────────────────
 def extract_tasks_with_groq(transcript: str) -> list:
     prompt = f"""You are an elite scrum master AI assistant. Analyze the transcript and extract ALL explicit action items.
 CRITICAL RULES:
@@ -529,7 +493,7 @@ JSON format:
             st.session_state["groq_api_status"] = f"ERROR: {err_msg[:50]}"
         return []
 
-# ─── Jira Logic ───────────────────────────────────────────────────────────────
+# ──────────────────────── Jira Logic ──────────────────────────────────────────
 def create_jira_issue(summary: str, description: str = ""):
     auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_TOKEN)
     fields = {"project": {"key": PROJECT_KEY}, "summary": summary, "issuetype": {"name": "Task"}}
@@ -561,7 +525,7 @@ def transition_jira_issue(issue_key: str, target_status: str):
                 return
     except Exception: pass
 
-# ─── Session State ────────────────────────────────────────────────────────────
+# ───────────────────────── Session State ──────────────────────────────────────
 if "tasks" not in st.session_state: st.session_state.tasks = []
 if "segments" not in st.session_state: st.session_state.segments = []
 if "speaker_colors" not in st.session_state: st.session_state.speaker_colors = {}
@@ -569,7 +533,7 @@ if "master_select" not in st.session_state: st.session_state.master_select = Fal
 if "final_sync_list" not in st.session_state: st.session_state.final_sync_list = []
 if "synced_results" not in st.session_state: st.session_state.synced_results = []
 
-# ─── Hero ─────────────────────────────────────────────────────────────────────
+# ──────────────────────── Hero ────────────────────────────────────────────────
 _logo_path = Path("meetask_logo-removebg-preview.png")
 if _logo_path.exists():
     _logo_b64 = base64.b64encode(_logo_path.read_bytes()).decode()
@@ -597,8 +561,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-
-# ─── Step 1 ───────────────────────────────────────────────────────────────────
+# ───────────────────────────── Step 1 ─────────────────────────────────────────
 st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">1</div></div><p class="step-title">Upload Recording</p></div>', unsafe_allow_html=True)
 
@@ -614,7 +577,6 @@ if uploaded_file or st.session_state.get("demo_audio_bytes"):
         else len(st.session_state["demo_audio_bytes"])
     )
     size_mb = size_bytes / (1024 * 1024)
-
     col_ready, col_clear = st.columns([9.3, 0.7], vertical_alignment="center")
 
     with col_ready:
@@ -673,7 +635,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 
 
-# ─── Step 2 ───────────────────────────────────────────────────────────────────
+# ──────────────────────── Step 2 ──────────────────────────────────────────────
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">2</div></div><p class="step-title">Transcribe &amp; Extract</p></div>', unsafe_allow_html=True)
 effective_file = uploaded_file or st.session_state.get("demo_audio_bytes")
 
@@ -732,9 +694,6 @@ if st.button("Run AI Processing", type="primary", disabled=not effective_file):
 
         st.session_state.tasks = tasks
 
-        # ── Պահպանում ենք Groq-ի վերադարձրած JSON-ը՝ tasks.json ֆայլում ──
-        # (Այս ֆայլը թարմացվում է ամեն մշակումից հետո, որպեսզի տեսանելի
-        #  լինի, թե ինչ կառուցվածքային output է վերադարձնում Groq-ը։)
         try:
             with open("tasks.json", "w", encoding="utf-8") as f:
                 json.dump(
@@ -746,9 +705,6 @@ if st.button("Run AI Processing", type="primary", disabled=not effective_file):
         except Exception as e:
             st.warning(f"Could not save tasks.json: {e}")
 
-        # ── Պահպանում ենք AssemblyAI-ի transcript-ը՝ transcript.json ֆայլում ──
-        # (Այս ֆայլը ցույց է տալիս AssemblyAI-ի արդյունքը՝ utterance-ները
-        #  իրենց ժամանականիշներով, խոսողներով, և տեքստով։)
         try:
             with open("transcript.json", "w", encoding="utf-8") as f:
                 json.dump(
@@ -760,9 +716,7 @@ if st.button("Run AI Processing", type="primary", disabled=not effective_file):
         except Exception as e:
             st.warning(f"Could not save transcript.json: {e}")
 
-        palette = [
-            "#c084fc", "#67e8f9", "#818cf8", "#a78bfa", "#2dd4bf", "#86efac", "#93c5fd"
-        ]
+        palette = ["#c084fc", "#67e8f9", "#818cf8", "#a78bfa", "#2dd4bf", "#86efac", "#93c5fd"]
 
         unique_raw_speakers = sorted(
             list(set([s["speaker"] for s in st.session_state.segments]))
@@ -799,7 +753,7 @@ if st.button("Run AI Processing", type="primary", disabled=not effective_file):
         if os.path.exists(temp_path):
             os.remove(temp_path)  
 
-# ─── Speaker Names ────────────────────────────────────────────────────────────
+# ─────────────────────── Speaker Names ────────────────────────────────────────
 unique_speakers = sorted(list(set([s["speaker"] for s in st.session_state.segments]))) if st.session_state.segments else []
 if "speaker_mapping" not in st.session_state:
     st.session_state.speaker_mapping = {}
@@ -814,7 +768,6 @@ if unique_speakers:
     else:
         cols = st.columns(n, gap="large")
 
-
     example_names = ["John", "Maria", "Alex", "Sarah", "David", "Emma", "Michael", "Sophia"]
     for idx, old_name in enumerate(unique_speakers):
         placeholder_name = example_names[idx % len(example_names)]
@@ -826,7 +779,7 @@ if unique_speakers:
         )
         speaker_mapping[old_name] = new_name.strip() if new_name.strip() else old_name
 
-# ─── Transcript Display ───────────────────────────────────────────────────────
+# ────────────────────── Transcript Display ────────────────────────────────────
 if st.session_state.segments:
     hl_config = {
         "DONE": ("#bbf7d0", "#166534"),
@@ -958,11 +911,11 @@ if st.session_state.segments:
         )
     st.markdown('<div class="transcript-box">' + "".join(lines_html) + "</div>", unsafe_allow_html=True)
 
-# ─── Step 3 & Step 4 (Review & Sync) ──────────────────────────────────────────
+# ────────────────── Step 3, Step 4 (Review, Sync) ───────────────────────────
 
     st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
     if st.session_state.get("groq_api_status") == "RATE_LIMIT":
-        st.error("🚨 **Groq API Rate Limit Exceeded (Սխալ 429):** Այսօր շատ փորձարկելու պատճառով սերվերը քեզ ժամանակավորապես սառեցրել է։ Սպասիր 1 րոպե կամ օգտագործիր Mock տարբերակը։")
+        st.error("🚨 **Groq API Rate Limit Exceeded (Սխալ 429):** Այսօր շատ փորձարկելու պատճառով սերվերը ժամանակավորապես անհասանելի է։ Սպասիր 1 րոպե կամ օգտագործիր Mock տարբերակը։")
     elif "groq_api_status" in st.session_state:
         st.error(f"🚨 **Groq API Ձախողում:** {st.session_state['groq_api_status']}")
 
@@ -1101,7 +1054,7 @@ if st.session_state.tasks:
                     label_visibility="collapsed"
                 )
 
-    # ─── Step 4 ───────────────────────────────────────────────────────────────────
+    # ──────────────────────── Step 4 ──────────────────────────────────────────────
     st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
     st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">4</div></div><p class="step-title">Send to Jira</p></div>', unsafe_allow_html=True)
     
