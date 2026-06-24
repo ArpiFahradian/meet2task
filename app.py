@@ -451,28 +451,11 @@ div[data-testid="stHorizontalBlock"]:has(button[key^="demo_btn_"]) button:focus:
     display: none !important;
 }
 
+
 [data-testid="stFileUploaderDropzoneInstructions"] {
     visibility: hidden !important;
-    position: relative !important;
-}
-[data-testid="stFileUploaderDropzoneInstructions"]::before {
-    visibility: visible !important;
-    content: " Drag and drop file here";
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1rem;
-    font-weight: 600;
-    color: rgba(255,255,255,.9);
-}
-[data-testid="stFileUploaderDropzoneInstructions"]::after {
-    visibility: visible !important;
-    content: "Limit 200MB per file • OGG, MP3, WAV";
-    position: absolute;
-    left: 0;
-    top: 26px;
-    font-size: .85rem;
-    color: rgba(255,255,255,.4);
+    height: 0 !important;
+    overflow: hidden !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -619,8 +602,13 @@ st.markdown(f"""
 st.markdown('<hr class="step-divider">', unsafe_allow_html=True)
 st.markdown('<div class="step-wrap"><div class="step-num-wrap"><div class="step-ring"></div><div class="step-num-inner">1</div></div><p class="step-title">Upload Recording</p></div>', unsafe_allow_html=True)
 
-uploaded_file = st.file_uploader("", type=["ogg", "mp3", "wav"], label_visibility="collapsed")
+uploaded_file = st.file_uploader("Upload audio file", type=["ogg", "mp3", "wav"], label_visibility="collapsed")
 
+st.markdown(
+    '<p style="font-size:.82rem;color:rgba(255,255,255,.35);margin-top:-10px;">'
+    'Limit 200MB per file • OGG, MP3, WAV</p>',
+    unsafe_allow_html=True
+)
 if "demo_audio_bytes" in st.session_state and not uploaded_file:
     import io
     uploaded_file = io.BytesIO(st.session_state["demo_audio_bytes"])
